@@ -9,6 +9,7 @@ body {
 
 ul {
 	list-style: none;
+	padding-left: 0;
 }
 
 .close {
@@ -80,4 +81,12 @@ ul {
 
 #lightboxImage{
 	border: 5px solid rgba(255, 255, 255, 0.6);
+}
+
+
+/* Allow scroll on landscape phones so next/prev buttons + escape text can be read */
+@media screen and (orientation: landscape) {
+	.lightbox {
+		overflow: scroll;
+	}
 }
