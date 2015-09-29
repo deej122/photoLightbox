@@ -2,24 +2,29 @@ a {
 	text-decoration: none;
 }
 
-.close {
-	color: #fff;
-	font-size: 50px;
-	font-weight: bold;
-	position: absolute;
-	right: 40px;
-	top: 20px;
-}
-
 .imageThumbnails {
 	list-style: none;
 	margin: none;
 	padding: none;
 }
 
+.instructions {
+	font-size: 14px;
+}
+
 .thumbnail {
+	border: 5px solid transparent;
+	cursor: pointer;
 	display: inline-block;
-	margin: 10px;
+	margin: 5px;
+}
+
+.thumbnail:hover {
+	border-color: rgba(75, 183, 76, 1);
+}
+
+.thumbnailImage {
+	display: block;
 }
 
 .toggle {

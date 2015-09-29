@@ -1,7 +1,7 @@
 // Set API variables
 var flickr_key = "3e3c7312558715a97a1420a72e2d8251";
 var flickr_secret = "0dd531d8540e3a05";
-var photoset_id = "72157659166167826";
+var photoset_id = "72157659269611965";
 var user_id = "135894911@N08";
 
 // Set URL endpoint for API
@@ -15,6 +15,7 @@ function displayImages (album) {
 
 	// Generate image thumbnails on page
 	createThumbnails(images);
+	// Set up lightbox functionality/elements
 	initializeLightbox(images);
 }
 
@@ -22,7 +23,6 @@ function displayImages (album) {
 // Function to loop through all images in photoset and display image thumbnails on the page
 function createThumbnails(images) {
 	for(i = 0; i < images.length; i++) {
-		console.log(images[i]);
 
 		var thumbnail_item = document.createElement("LI");
 		var thumbnail_image = document.createElement("IMG");
@@ -61,6 +61,7 @@ function initializeLightbox(images) {
 		var imageId = e.target.id;
 
 		document.getElementById("lightboxContainer").style.display = "block";
+		window.addEventListener("keydown", closeLightbox, false);
 
 		for(i=0; i < images.length; i++) {
 			if(images[i].id == imageId) {
@@ -74,9 +75,6 @@ function initializeLightbox(images) {
 
 	// Function which toggles to next or previous image depending on which button is clicked
 	function toggleImage (e) {
-		console.log(e);
-		console.log(images);
-
 		// Setting these variables for cleanliness
 		var index = images.indexOf(currentImage);
 		var targetId = e.target.id;
@@ -91,12 +89,8 @@ function initializeLightbox(images) {
 				currentImage = images[0];
 			}
 
-			console.log(currentImage);
 			document.getElementById("lightboxImage").src = currentImage.url_m;
 			document.getElementById("lightboxTitle").innerHTML = currentImage.title;
-
-			console.log("Next Image!");
-
 		}
 		else if(targetId == "togglePrevious") {
 
@@ -108,18 +102,22 @@ function initializeLightbox(images) {
 				currentImage = images[images.length - 1];
 			}
 
-			console.log(currentImage);
 			document.getElementById("lightboxImage").src = currentImage.url_m;
 			document.getElementById("lightboxTitle").innerHTML = currentImage.title;
-
-			console.log("Previous Image!");
-
 		}
-
 		// Just in case
 		else {
 			return;
 		}
+	}
+}
+
+function closeLightbox (e) {
+	if(e.which == 27) {
+		document.getElementById("lightboxContainer").style.display = "none";
+	}
+	else {
+		return;
 	}
 }
 
