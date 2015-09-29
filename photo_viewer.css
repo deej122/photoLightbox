@@ -1,5 +1,17 @@
+body {
+	font-family: Cabin, 'sans-serif';
+	text-align: center;
+}
+
 a {
 	text-decoration: none;
+}
+
+.footer{
+	bottom: 10px;
+	font-size: 12px;
+	left: 10px;
+	position: absolute;
 }
 
 .imageThumbnails {
@@ -31,9 +43,12 @@ a {
 	border: 1px solid;
 	cursor: pointer;
 	display: inline-block;
-	font-size: 30px;
-	margin: 10px;
-	padding: 20px;
+	font-size: 18px;
+	margin: 15px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
 }
 
 .toggle:hover {
@@ -42,7 +57,7 @@ a {
 }
 
 .lightbox {
-	background: rgba(0,0,0,0.8);
+	background: rgba(0,0,0,0.9);
 	bottom: 0;
 	color: #fff;
 	display: none;

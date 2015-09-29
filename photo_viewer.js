@@ -19,7 +19,6 @@ function displayImages (album) {
 	initializeLightbox(images);
 }
 
-
 // Function to loop through all images in photoset and display image thumbnails on the page
 function createThumbnails(images) {
 	for(i = 0; i < images.length; i++) {
@@ -38,10 +37,9 @@ function createThumbnails(images) {
 }
 
 function initializeLightbox(images) {
-	// Set default image to be first in the album (just a sanity check)
+	// Set default image to be first in the album (unnecessary, but for my sanity)
 	currentImage = images[0];
-	document.getElementById("lightboxImage").src = currentImage.url_m;
-	document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+	updateLightbox(currentImage);
 
 	// Add click event to thumbnails to open lightbox with corresponding image
 	var thumbnails = document.querySelectorAll("img.thumbnailImage");
@@ -61,13 +59,18 @@ function initializeLightbox(images) {
 		var imageId = e.target.id;
 
 		document.getElementById("lightboxContainer").style.display = "block";
+		// Add key press controls to lightbox
 		window.addEventListener("keydown", closeLightbox, false);
+		window.addEventListener("keydown", toggleImage, false);
 
+		// Find image that was targeted and display its information in the lightbox
+		// Kind of brute-forcing it, but can't see a better way
 		for(i=0; i < images.length; i++) {
 			if(images[i].id == imageId) {
 				currentImage = images[i];
-				document.getElementById("lightboxImage").src = currentImage.url_m;
-				document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+
+				// Call function to fill in accurate lightbox information
+				updateLightbox(currentImage);
 				return currentImage;
 			}
 		}
@@ -79,7 +82,7 @@ function initializeLightbox(images) {
 		var index = images.indexOf(currentImage);
 		var targetId = e.target.id;
 
-		if(targetId == "toggleNext") {
+		if(targetId == "toggleNext" || e.which == 39) {
 
 			// If we reach the end of the list, go back to first image
 			if(index < images.length - 1) {
@@ -89,10 +92,10 @@ function initializeLightbox(images) {
 				currentImage = images[0];
 			}
 
-			document.getElementById("lightboxImage").src = currentImage.url_m;
-			document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+			// Call function to fill in accurate lightbox information
+			updateLightbox(currentImage);
 		}
-		else if(targetId == "togglePrevious") {
+		else if(targetId == "togglePrevious" || e.which == 37) {
 
 			// If we reach first image, go to last image
 			if(index > 0) {
@@ -102,22 +105,31 @@ function initializeLightbox(images) {
 				currentImage = images[images.length - 1];
 			}
 
-			document.getElementById("lightboxImage").src = currentImage.url_m;
-			document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+			// Call function to fill in accurate lightbox information
+			updateLightbox(currentImage);
 		}
 		// Just in case
 		else {
 			return;
 		}
 	}
-}
 
-function closeLightbox (e) {
-	if(e.which == 27) {
-		document.getElementById("lightboxContainer").style.display = "none";
+	// Create a function to update lightbox information to avoid repetition
+	function updateLightbox (currentImage) {
+		document.getElementById("lightboxImage").src = currentImage.url_m;
+		document.getElementById("lightboxTitle").innerHTML = currentImage.title;
 	}
-	else {
-		return;
+
+	function closeLightbox (e) {
+		if(e.which == 27) {
+			document.getElementById("lightboxContainer").style.display = "none";
+			// Remove all event listeners that were set when the lightbox was opened
+			window.removeEventListener("keydown", closeLightbox);
+			window.removeEventListener("keydown", toggleImage);
+		}
+		else {
+			return;
+		}
 	}
 }
 
