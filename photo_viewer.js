@@ -13,30 +13,64 @@ function displayImages (album) {
 	var i;
 	var images = album.photo;
 
+	// Generate image thumbnails on page
+	createThumbnails(images);
+	initializeLightbox(images);
+}
+
+
+// Function to loop through all images in photoset and display image thumbnails on the page
+function createThumbnails(images) {
 	for(i = 0; i < images.length; i++) {
 		console.log(images[i]);
 
 		var thumbnail_item = document.createElement("LI");
 		var thumbnail_image = document.createElement("IMG");
 
-		thumbnail_item.id = images[i].id;
 		thumbnail_item.className = "thumbnail";
+		thumbnail_image.id = images[i].id;
+		thumbnail_image.className = "thumbnailImage";
 		thumbnail_image.src = images[i].url_s;
 
 		thumbnail_item.appendChild(thumbnail_image);
 		document.getElementById("imageThumbnails").appendChild(thumbnail_item);
 	}
+}
 
-	// Set default image to be first in the album
+function initializeLightbox(images) {
+	// Set default image to be first in the album (just a sanity check)
 	currentImage = images[0];
 	document.getElementById("lightboxImage").src = currentImage.url_m;
 	document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+
+	// Add click event to thumbnails to open lightbox with corresponding image
+	var thumbnails = document.querySelectorAll("img.thumbnailImage");
+	[].forEach.call(thumbnails, function(thumbnail) {
+		thumbnail.addEventListener('click', selectImage, false);
+	});
 
 	// Add click event to next/previous toggle buttons in lightbox
 	var toggles = document.querySelectorAll("div.toggle");
 	[].forEach.call(toggles, function(toggle) {
 		toggle.addEventListener('click', toggleImage, false);
 	});
+
+	// Select image based on what thumbnail is clicked
+	function selectImage (e) {
+		var i;
+		var imageId = e.target.id;
+
+		document.getElementById("lightboxContainer").style.display = "block";
+
+		for(i=0; i < images.length; i++) {
+			if(images[i].id == imageId) {
+				currentImage = images[i];
+				document.getElementById("lightboxImage").src = currentImage.url_m;
+				document.getElementById("lightboxTitle").innerHTML = currentImage.title;
+				return currentImage;
+			}
+		}
+	}
 
 	// Function which toggles to next or previous image depending on which button is clicked
 	function toggleImage (e) {
@@ -86,7 +120,6 @@ function displayImages (album) {
 		else {
 			return;
 		}
-
 	}
 }
 

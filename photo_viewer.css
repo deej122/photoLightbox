@@ -49,10 +49,10 @@ a {
 	top: 0;
 }
 
-/*Display lightbox when anchor tag is activated*/
+/*Display lightbox when anchor tag is activated
 .lightbox:target{
 	display: inline-block;
-}
+}*/
 
 #lightboxImage{
 	border: 5px solid rgba(255, 255, 255, 0.6);
