@@ -1,0 +1,63 @@
+a {
+	text-decoration: none;
+}
+
+.close {
+	color: #fff;
+	font-size: 50px;
+	font-weight: bold;
+	position: absolute;
+	right: 40px;
+	top: 20px;
+}
+
+.imageThumbnails {
+	list-style: none;
+	margin: none;
+	padding: none;
+}
+
+.thumbnail {
+	display: inline-block;
+	margin: 10px;
+}
+
+.toggle {
+	border: 1px solid;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 30px;
+	margin: 10px;
+	padding: 20px;
+}
+
+.toggle:hover {
+	border-color: rgba(75, 183, 76, 1);
+	color: rgba(75, 183, 76, 1);
+}
+
+.lightbox {
+	background: rgba(0,0,0,0.8);
+	bottom: 0;
+	color: #fff;
+	display: none;
+	font-size: 14px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+}
+
+/*Display lightbox when anchor tag is activated*/
+.lightbox:target{
+	display: inline-block;
+}
+
+#lightboxImage{
+	border: 5px solid rgba(255, 255, 255, 0.6);
+}
+
+#lightboxTitle {
+	font-size: 40px;
+}
