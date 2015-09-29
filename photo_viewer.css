@@ -1,27 +1,38 @@
+a {
+	text-decoration: none;
+}
+
 body {
 	font-family: Cabin, 'sans-serif';
 	text-align: center;
 }
 
-a {
-	text-decoration: none;
-}
-
-.footer{
-	bottom: 10px;
-	font-size: 12px;
-	left: 10px;
-	position: absolute;
-}
-
-.imageThumbnails {
+ul {
 	list-style: none;
-	margin: none;
-	padding: none;
 }
 
-.instructions {
+.close {
+	cursor: pointer;
+	position: absolute;
+	left: 40px;
+	text-transform: uppercase;
+	top: 20px;
+}
+
+.font-large {
+	font-size: 40px;
+}
+
+.font-medium {
+	font-size: 18px;
+}
+
+.font-small {
 	font-size: 14px;
+}
+
+.font-tiny {
+	font-size: 12px;
 }
 
 .thumbnail {
@@ -35,7 +46,7 @@ a {
 	border-color: rgba(75, 183, 76, 1);
 }
 
-.thumbnailImage {
+.thumbnail_image {
 	display: block;
 }
 
@@ -43,7 +54,6 @@ a {
 	border: 1px solid;
 	cursor: pointer;
 	display: inline-block;
-	font-size: 18px;
 	margin: 15px;
 	padding-bottom: 10px;
 	padding-left: 15px;
@@ -61,7 +71,6 @@ a {
 	bottom: 0;
 	color: #fff;
 	display: none;
-	font-size: 14px;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -69,15 +78,6 @@ a {
 	top: 0;
 }
 
-/*Display lightbox when anchor tag is activated
-.lightbox:target{
-	display: inline-block;
-}*/
-
 #lightboxImage{
 	border: 5px solid rgba(255, 255, 255, 0.6);
-}
-
-#lightboxTitle {
-	font-size: 40px;
 }

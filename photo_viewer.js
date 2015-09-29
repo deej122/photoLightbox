@@ -10,7 +10,6 @@ var url = "https://api.flickr.com/services/rest/?&method=flickr.photosets.getPho
 
 // Function to control page UI/content
 function displayImages (album) {
-	var i;
 	var images = album.photo;
 
 	// Generate image thumbnails on page
@@ -21,6 +20,8 @@ function displayImages (album) {
 
 // Function to loop through all images in photoset and display image thumbnails on the page
 function createThumbnails(images) {
+	var i;
+
 	for(i = 0; i < images.length; i++) {
 
 		var thumbnail_item = document.createElement("LI");
@@ -28,21 +29,29 @@ function createThumbnails(images) {
 
 		thumbnail_item.className = "thumbnail";
 		thumbnail_image.id = images[i].id;
-		thumbnail_image.className = "thumbnailImage";
+		thumbnail_image.className = "thumbnail_image";
 		thumbnail_image.src = images[i].url_s;
 
 		thumbnail_item.appendChild(thumbnail_image);
-		document.getElementById("imageThumbnails").appendChild(thumbnail_item);
+		document.getElementById("thumbnailList").appendChild(thumbnail_item);
 	}
 }
 
+// This function handles ALL lightbox functionality
+// Four nested functions: 
+// 1. selectImage: Opens lightbox when an image thumbnail is selected
+// 2. toggleImage: Navigates through list of images forwards/backwards
+// 3. updateLightbox: Called from toggleImage - handles replacing information in lightbox when image is changed
+// 4. closeLightbox: Closes lightbox on escape keydown and removes all event listeners
+
 function initializeLightbox(images) {
+	var currentImage;
 	// Set default image to be first in the album (unnecessary, but for my sanity)
 	currentImage = images[0];
 	updateLightbox(currentImage);
 
 	// Add click event to thumbnails to open lightbox with corresponding image
-	var thumbnails = document.querySelectorAll("img.thumbnailImage");
+	var thumbnails = document.querySelectorAll("img.thumbnail_image");
 	[].forEach.call(thumbnails, function(thumbnail) {
 		thumbnail.addEventListener('click', selectImage, false);
 	});
@@ -60,6 +69,7 @@ function initializeLightbox(images) {
 
 		document.getElementById("lightboxContainer").style.display = "block";
 		// Add key press controls to lightbox
+		document.getElementById("closeLightbox").addEventListener('click', closeLightbox, false);
 		window.addEventListener("keydown", closeLightbox, false);
 		window.addEventListener("keydown", toggleImage, false);
 
@@ -68,7 +78,6 @@ function initializeLightbox(images) {
 		for(i=0; i < images.length; i++) {
 			if(images[i].id == imageId) {
 				currentImage = images[i];
-
 				// Call function to fill in accurate lightbox information
 				updateLightbox(currentImage);
 				return currentImage;
@@ -83,7 +92,6 @@ function initializeLightbox(images) {
 		var targetId = e.target.id;
 
 		if(targetId == "toggleNext" || e.which == 39) {
-
 			// If we reach the end of the list, go back to first image
 			if(index < images.length - 1) {
 				currentImage = images[index + 1];
@@ -95,8 +103,8 @@ function initializeLightbox(images) {
 			// Call function to fill in accurate lightbox information
 			updateLightbox(currentImage);
 		}
-		else if(targetId == "togglePrevious" || e.which == 37) {
 
+		else if(targetId == "togglePrevious" || e.which == 37) {
 			// If we reach first image, go to last image
 			if(index > 0) {
 				currentImage = images[index - 1];
@@ -108,6 +116,7 @@ function initializeLightbox(images) {
 			// Call function to fill in accurate lightbox information
 			updateLightbox(currentImage);
 		}
+
 		// Just in case
 		else {
 			return;
@@ -121,9 +130,10 @@ function initializeLightbox(images) {
 	}
 
 	function closeLightbox (e) {
-		if(e.which == 27) {
+		if( e.target.id == "closeLightbox" || e.which == 27) {
 			document.getElementById("lightboxContainer").style.display = "none";
 			// Remove all event listeners that were set when the lightbox was opened
+			document.getElementById("closeLightbox").removeEventListener('click', closeLightbox);
 			window.removeEventListener("keydown", closeLightbox);
 			window.removeEventListener("keydown", toggleImage);
 		}
