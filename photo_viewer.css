@@ -13,8 +13,8 @@ ul {
 
 .close {
 	cursor: pointer;
-	position: absolute;
 	left: 40px;
+	position: absolute;
 	text-transform: uppercase;
 	top: 20px;
 }
