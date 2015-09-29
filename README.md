@@ -7,8 +7,7 @@ Lightbox Photo Viewer
 
 This application uses the Flickr API to pull the photos from an album I've created on Flickr.
 It displays thumbnails of these images on the page and allows the user to click one to view it in a lightbox.
-Then, the user can either toggle through the images using the arrow keys or buttons on-screen 
-OR close the lightbox using the Escape key or the "Close" button in the top-left corner.
+Then, the user can either toggle through the images using the arrow keys or buttons on-screen or close the lightbox using the Escape key or the "Close" button in the top-left corner.
 ===========
 
 This is a static application.
