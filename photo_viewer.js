@@ -145,7 +145,7 @@ function initializeLightbox(images) {
 	}
 }
 
-// Retrieve JSON object containing set of images to toggle through using AJAX call
+// Retrieve JSONP containing set of images to toggle through using AJAX call
 $.ajax({
   url: url,
   dataType: 'jsonp',
