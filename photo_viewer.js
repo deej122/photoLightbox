@@ -6,7 +6,7 @@ var user_id = "135894911@N08";
 
 // Set URL endpoint for API
 var url = "https://api.flickr.com/services/rest/?&method=flickr.photosets.getPhotos&api_key=" + flickr_key + "&photoset_id=" + photoset_id + 
-"&user_id=" + user_id + "&extras=url_s,url_m&format=json&jsoncallback=?";
+"&user_id=" + user_id + "&extras=url_s,url_m&format=json&nojsoncallback=1";
 
 // Function to control page UI/content
 function displayImages (album) {
@@ -144,13 +144,14 @@ function initializeLightbox(images) {
 	}
 }
 
-// Retrieve JSON data from Flickr
-window.jsonFlickrApi = function(data) {
-    var album = data.photoset;
-    displayImages(album);
+// Call to retrieve JSON from Flickr, now!
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState==4 && xhr.status==200) {
+	    var data = JSON.parse(xhr.responseText);
+	    var album = data.photoset;
+	    displayImages(album);
+    }
 };
-
-// Because we're actually using jsonp
-var script = document.createElement('script');
-script.setAttribute('src', url);
-document.body.appendChild(script);
+xhr.open("GET", url, true);
+xhr.send();
