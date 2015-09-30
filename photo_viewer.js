@@ -69,6 +69,7 @@ function initializeLightbox(images) {
 
 		document.getElementById("lightboxContainer").style.display = "block";
 		// Add key press controls to lightbox
+		document.getElementById("lightboxContainer").addEventListener('click', closeLightbox, false);
 		document.getElementById("closeLightbox").addEventListener('click', closeLightbox, false);
 		window.addEventListener("keydown", closeLightbox, false);
 		window.addEventListener("keydown", toggleImage, false);
@@ -130,9 +131,10 @@ function initializeLightbox(images) {
 	}
 
 	function closeLightbox (e) {
-		if( e.target.id == "closeLightbox" || e.which == 27) {
+		if( e.target.id == "closeLightbox" || e.target.id == "lightboxContainer" || e.which == 27) {
 			document.getElementById("lightboxContainer").style.display = "none";
 			// Remove all event listeners that were set when the lightbox was opened
+			document.getElementById("lightboxContainer").removeEventListener('click', closeLightbox);
 			document.getElementById("closeLightbox").removeEventListener('click', closeLightbox);
 			window.removeEventListener("keydown", closeLightbox);
 			window.removeEventListener("keydown", toggleImage);
