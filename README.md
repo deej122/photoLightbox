@@ -14,4 +14,4 @@ Then, the user can either toggle through the images using the arrow keys or butt
 This is a static application.
 An AJAX call is made on page load to retrieve the album of photos from Flickr.
 Then, native JavaScript is used to dynamically put the page together and achieve all functionality.
-Some basic CSS is used to make the page presentable, as well.
+Some basic CSS is used to make the page NICE!
