@@ -145,13 +145,13 @@ function initializeLightbox(images) {
 	}
 }
 
-// Retrieve JSONP containing set of images to toggle through using AJAX call
-$.ajax({
-  url: url,
-  dataType: 'jsonp',
-  success: function(data){
-  	// Pass images to JS to handle display
-  	var album = data.photoset;
-  	displayImages(album);
-  }
-});
+// Retrieve JSON data from Flickr
+window.jsonFlickrApi = function(data) {
+    var album = data.photoset;
+    displayImages(album);
+};
+
+// Because we're actually using jsonp
+var script = document.createElement('script');
+script.setAttribute('src', url);
+document.body.appendChild(script);
