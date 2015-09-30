@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-	<link rel="stylesheet" type="text/css" href="photo_viewer.css">
-	<link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-  </head>
-  
-<body>
-	<h1 class="heading"> Pics from around the country </h1>
-	<span class="instructions font-small"> Click a photo to view in lightbox </span>
-	<br/>
-	<ul id="thumbnailList">
-		<!-- Thumbnails will be added here using JS -->
-	</ul>
-	<div class="lightbox font-small" id="lightboxContainer">
-		<h2 class="font-large" id="lightboxTitle">
-			<!-- Title will be set here using data retrieved from Flickr -->
-		</h2>
-		<!-- Image source will be set using data retrieved from Flickr -->
-		<img src="" id="lightboxImage"/>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="photo_viewer.css">
+		<link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+	</head>
+	  
+	<body>
+		<h1 class="heading"> Pics from around the country </h1>
+		<span class="instructions font-small"> Click a photo to view in lightbox </span>
 		<br/>
-		<div class="toggle font-medium" id="togglePrevious"> Previous </div>
-		<div class="toggle font-medium" id="toggleNext"> Next </div>
-		
-		<div class="instructions font-small"> Press the Escape key to close lightbox </div>
+		<ul id="thumbnailList">
+			<!-- Thumbnails will be added here using JS -->
+		</ul>
+		<div class="lightbox font-small" id="lightboxContainer">
+			<h2 class="font-large" id="lightboxTitle">
+				<!-- Title will be set here using data retrieved from Flickr -->
+			</h2>
+			<!-- Image source will be set using data retrieved from Flickr -->
+			<img src="" id="lightboxImage"/>
+			<br/>
+			<div class="toggle font-medium" id="togglePrevious"> Previous </div>
+			<div class="toggle font-medium" id="toggleNext"> Next </div>
+			
+			<div class="instructions font-small"> Press the Escape key to close lightbox </div>
 
-		<div class="close font-medium" id="closeLightbox"> Close </div>
-	</div>
+			<div class="close font-medium" id="closeLightbox"> Close </div>
+		</div>
 
-	<div class="footer font-tiny">
-		Created by DJ Jagannathan on 29 September 2015 for Slack
-	</div>
-  	<script src="photo_viewer.js"></script>
-</body>
+		<div class="footer font-tiny">
+			Created by DJ Jagannathan on 29 September 2015 for Slack
+		</div>
+	  	<script src="photo_viewer.js"></script>
+	</body>
 
 </html>
