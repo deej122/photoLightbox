@@ -48,7 +48,6 @@ function initializeLightbox(images) {
 	var currentImage;
 	// Set default image to be first in the album (unnecessary, but for my sanity)
 	currentImage = images[0];
-	updateLightbox(currentImage);
 
 	// Add click event to thumbnails to open lightbox with corresponding image
 	var thumbnails = document.querySelectorAll("img.thumbnail_image");
